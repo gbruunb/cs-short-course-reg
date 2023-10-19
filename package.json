@@ -1,0 +1,26 @@
+{
+  "name": "cs-short-course-reg",
+  "version": "1.0.0",
+  "description": "Project OS Docker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gbruunb/cs-short-course-reg.git"
+  },
+  "author": "Prachya Sangkharat and Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gbruunb/cs-short-course-reg/issues"
+  },
+  "homepage": "https://github.com/gbruunb/cs-short-course-reg#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.0.1"
+  }
+}
