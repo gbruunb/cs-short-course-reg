@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+    <div class="containner m-10">
+        <h1>Course ทั้งหมด</h1>
+        <table class="table-auto border-separate border-spacing-2 border border-slate-500 ...">
+            <thead>
+              <tr>
+                <th class="border border-slate-600">ลำดับ</th>
+                <th class="border border-slate-600">ชื่อคอร์ส</th>
+                <th class="border border-slate-600">ผู้สอน</th>
+                <th class="border border-slate-600">รายละเอียด</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% var count = 1 %>
+                <% for (const course of courses) { %>
+              <tr>
+                <td class="border border-slate-700 ..."><%= count %></td>
+                <td class="border border-slate-700 ..."><%= course.course_name %></td>
+                <td class="border border-slate-700 ..."><%= course.name %></td>
+                <td class="border border-slate-700 ..."><%= course.description %></td>
+              </tr>
+              <% count++ %>
+              <% } %>
+            </tbody>
+
+          </table>
+    </div>
+</body>
+</html>

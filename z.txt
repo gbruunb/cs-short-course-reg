@@ -1,0 +1,12 @@
+<tbody>
+                <% var count = 1 %>
+                <% for (const course of courses) { %>
+              <tr>
+                <td class="border border-slate-700 ..."><%= count %></td>
+                <td class="border border-slate-700 ..."><%= course.course_name %></td>
+                <td class="border border-slate-700 ..."><%= course.name %></td>
+                <td class="border border-slate-700 ..."><%= course.description %></td>
+              </tr>
+              <% count++ %>
+              <% } %>
+            </tbody>

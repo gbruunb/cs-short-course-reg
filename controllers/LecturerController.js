@@ -26,4 +26,5 @@ function addCourse(req, res) {
   }
 }
 
+
 module.exports = { createCourseForm, addCourse };
