@@ -65,5 +65,28 @@ function editCourse(req, res) {
     }
   }
 
+  function deleteCourse(req, res) {
+    const id = req.params.id
+    const { name, course_name, description } = req.body;
+    try {
+      connection.query(
+        "DELETE FROM course WHERE id = ?",
+        [id],
+        (err, result, fields) => {
+          if (err) {
+            console.log("insert error");
+            return res.status(400).send();
+          }
+          return res
+            .status(201)
+            .json({ message: "New user created successfully" });
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send();
+    }
+  }
 
-module.exports = { createCourseForm, addCourse, editCourseForm, editCourse };
+
+module.exports = { createCourseForm, addCourse, editCourseForm, editCourse ,deleteCourse};

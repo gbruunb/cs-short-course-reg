@@ -31,6 +31,7 @@
                 <td class="border border-slate-700 ..."><%= course.description %></td>
                 <input type="hidden" value="<%= course.id %>" name="id">
                 <td class="border border-slate-700 ..."><button type="submit" class="border"><a href="/edit-course/<%= course.id %>">edit</a></button></td>
+                <td class="border border-slate-700 ..."><button type="submit" class="border"><a href="/delete-course/<%= course.id %>">delete</a></button></td>
               </tr>
               <% count++ %>
               <% } %>
