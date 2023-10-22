@@ -15,4 +15,8 @@ function showCourseList(req,res) {
     }
 }
 
+function openCourse(req, res) {
+    res.render('student/open-course')
+}
+
 module.exports = { showCourseList };
