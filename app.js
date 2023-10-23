@@ -3,6 +3,10 @@ const app = express()
 const router = require('./routes/router')
 const path = require('path')
 
+const bcrypt = require("bcryptjs")
+
+
+
 
 app.set('views',path.join(__dirname,'views'))
 app.set('view engine','ejs')
