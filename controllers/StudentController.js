@@ -15,8 +15,8 @@ function showCourseList(req,res) {
     }
 }
 
-function openCourse(req, res) {
-    res.render('student/open-course')
+function allCourse(req, res) {
+    res.render('student/all-course')
 }
 
-module.exports = { showCourseList, openCourse };
+module.exports = { showCourseList, allCourse };

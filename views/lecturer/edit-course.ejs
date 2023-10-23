@@ -6,54 +6,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Course</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.tailwindcss.com/2.2.15/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <div class="container m-10">
-        <h1 class="text-5xl">แก้ไขคอร์ส</h1>
-        <% for (const detail of details) { %>
-        <form method="POST" action="/update-course/<%= detail.id %>">
-            <div class="space-y-12">
-                
-                <div class="border-b border-gray-900/10 pb-12">
-                    
-                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                        <div class="sm:col-span-3">
-                            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Lecturer Name</label>
-                            <div class="mt-2">
-                                <input type="text" name="name" id="name" autocomplete="given-name" value="<%= detail.name %>"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
-                        </div>
+<body class="min-h-screen bg-black">
+    <nav id="navbar" class="fixed top-0 left-0 w-full bg-white transition-all duration-300">
+        <nav class="bg-white border-gray-700 dark:bg-gray-900 ">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="https://www.kmitl.ac.th/sites/default/files/2022-03/kmitl%20science_1.png"
+                    class="flex items-center">
+                    <img src="https://www.kmitl.ac.th/sites/default/files/2022-03/kmitl%20science_1.png"
+                        class="h-8 mr-3" alt="Flowbite Logo" />
 
-                        <div class="sm:col-span-3">
-                            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">ชื่อคอร์ส</label>
-                            <div class="mt-2">
-                                <input type="text" name="course_name" id="first-name" autocomplete="given-name" value="<%= detail.course_name %>"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
-                        </div>
-                        <div class="sm:col-span-3">
-                            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">รายละเอียด</label>
-                            <div class="mt-2">
-                                <input type="text" name="description" id="first-name" autocomplete="given-name" value="<%= detail.description %>"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
-                        </div>
-                        <% } %>
-                    </div>
+                </a>
+                <button data-collapse-toggle="navbar-default" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-default" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                    <ul
+                        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+
+
+                        <li>
+                            <a href="/course-list"
+                                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                                aria-current="page">Home</a>
+                        </li>
+                        <li>
+                            <a href="/open-course"
+                                class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-orange-500"
+                                aria-current="page">OpenCourse</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+        </nav>
+    </nav>
 
+    <form method="POST" action="/update-course/<%= detail.id %>">
+        <div class="relative flex items-center justify-center">
+            <div class="bg-[#DD501C] w-full h-[250px] mt-[50px]"></div>
+            <div class="absolute top-1/2 text-white text-4xl z-10">OPEN YOUR COURSE</div>
+        </div>
+
+        <div class="flex items-center mt-[100px] ml-[100px]">
+            <img src="https://cdn0.iconfinder.com/data/icons/business-management-197/55/Books-512.png" alt="PNG trophy"
+                class="w-14 h-14" />
+            <div class="text-white text-4xl ml-4">ข้อมูลผู้สอน</div>
+        </div>
+        <div class="flex items-center mt-[30px] ml-[100px]">
+            <img src="https://www.meetministry.org/media/commerce_products/117/home_study_course_store.jpg"
+                alt="PNG course" class="w-[450px] h-[350px] mt-[40px] ml-[5px]" />
+            <div class="flex flex-col items-start">
+                <input type="text" value="<%= detail.lec_name %>" name="lec_name" class="mt-[35px] ml-[50px] w-[700px] h-[40px] bg-white text-black rounded-3xl p-4"
+                    placeholder="ชื่อจริง นามสกุล ผู้สอน :">
+                <input type="text" value="<%= detail.lec_nickname %>" name="lec_nickname" class="mt-[35px] ml-[50px] w-[700px] h-[40px] bg-white text-black rounded-3xl p-4"
+                    placeholder="ชื่อเล่นผู้สอน :">
+                <input type="text" value="<%= detail.role %>" name="role" class="mt-[35px] ml-[50px] w-[700px] h-[40px] bg-white text-black rounded-3xl p-4"
+                    placeholder="ตำแหน่ง / ชั้นปี :">
+                <input type="text" value="<%= detail.date %>" name="date" class="mt-[35px] ml-[50px] w-[700px] h-[40px] bg-white text-black rounded-3xl p-4"
+                    placeholder="วันที่จัด :">
+                <input type="text" value="<%= detail.time %>" name="time" class="mt-[35px] ml-[50px] w-[700px] h-[40px] bg-white text-black rounded-3xl p-4"
+                    placeholder="เวลาที่จัด :">
                 
             </div>
+        </div>
 
-            <div class="mt-6 flex items-center justify-end gap-x-6">
-                <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-                <button type="submit"
-                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+        <div class="flex items-center mt-[100px] ml-[100px]">
+            <img src="https://cdn0.iconfinder.com/data/icons/business-management-197/55/Books-512.png" alt="PNG trophy"
+                class="w-14 h-14" />
+            <div class="text-white text-4xl ml-4">ข้อมูลคอร์ส</div>
+        </div>
+        <div class="flex items-center mt-[30px] ml-[100px]">
+            <img src="https://www.meetministry.org/media/commerce_products/117/home_study_course_store.jpg"
+                alt="PNG course" class="w-[450px] h-[350px] mt-[40px] ml-[5px]" />
+            <div class="flex flex-col items-start">
+                <input type="text" value="<%= detail.course_name %>" name="course_name" class="mt-[35px] ml-[50px] w-[700px] h-[40px] bg-white text-black rounded-3xl p-4"
+                    placeholder="ข้อความสั้น ๆ สำหรับแนะนำคอร์ส :">
+                <input type="text" value="<%= detail.des %>" name="des" class="mt-[35px] ml-[50px] w-[700px] h-[40px] bg-white text-black rounded-3xl p-4"
+                    placeholder="ข้อความสั้น ๆ สำหรับแนะนำคอร์ส :">
+                <input type="text" value="<%= detail.device %>" name="device" class="mt-[35px] ml-[50px] w-[700px] h-[40px] bg-white text-black rounded-3xl p-4"
+                    placeholder="อุปกรณ์ที่อยากให้ผู้เข้าเรียนเตรียมมา :">
+                <input type="text" value="<%= detail.tool %>" name="tool" class="mt-[35px] ml-[50px] w-[700px] h-[40px] bg-white text-black rounded-3xl p-4"
+                    placeholder="เครื่องมือหรือโปรแกรมที่ต้องการให้ผู้เรียนเตรียมมา :">
+                <input type="text" value="<%= detail.more %>" name="more" class="mt-[35px] ml-[50px] w-[700px] h-[40px] bg-white text-black rounded-3xl p-4"
+                    placeholder="เพิ่มเติม :">
+                <input type="text" value="<%= detail.contact %>" name="contact" class="mt-[35px] ml-[50px] w-[700px] h-[40px] bg-white text-black rounded-3xl p-4"
+                    placeholder="ช่องทางติดต่อผู้สอน :">
             </div>
-        </form>
-    </div>
+        </div>
+
+        <div class="flex flex-col items-start">
+            <div class="rounded-none bg-[#EE7832] text-white mt-[60px] ml-[110px] p-1">เนื้อหา หรือหัวข้อที่จะสอนในคอร์สในแต่ละวัน :</div>
+            <textarea class="mt-[35px] ml-[110px] mb-[150px] w-[1200px] h-[200px] bg-white text-black rounded-2xl p-4" name="content"
+                placeholder="เนื้อหา หรือหัวข้อที่จะสอนในคอร์สในแต่ละวัน :"><%= detail.content %></textarea>
+        </div>
+        <div class="text-right mr-[200px] mt-[-120px]">
+                <button
+                    class="w-[120px] h-[39px] px-4 py-2.5 bg-amber-200 from-orange-600 to-yellow-400 rounded-full justify-center items-center gap-2 inline-flex">
+                    <div class="text-black text-xl font-normal font-font-sans">SUBMIT</div>
+                </button>
+        </div>
+
+    </form>
+
 </body>
 
 </html>
