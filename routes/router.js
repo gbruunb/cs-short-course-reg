@@ -1,18 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const app = require("../app")
-const cookieSession = require("cookie-session");
-
-
 
 const MainController = require("../controllers/MainController");
 const LecturerController = require("../controllers/LecturerController");
 const StudentController = require("../controllers/StudentController");
 
-
 router.get("/", MainController.home);
 router.get("/signin", MainController.signInPage);
-router.get("/register", MainController.registerPage);
+router.get("/register_page", MainController.registerPage);
+
 
 router.get("/create-course-form", LecturerController.createCourseForm);
 router.get("/course-list", StudentController.showCourseList);
@@ -24,5 +20,7 @@ router.post("/register", MainController.register);
 router.post("/add-course", LecturerController.addCourse);
 router.post("/update-course/:id", LecturerController.editCourse);
 router.get("/delete-course/:id", LecturerController.deleteCourse);
+
+
 
 module.exports = router;

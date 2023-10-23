@@ -1,4 +1,5 @@
 const { connection } = require("./DBConnection");
+const bcrypt = require("bcrypt")
 
 
 function home(req, res) {
@@ -13,26 +14,25 @@ function registerPage(req, res) {
     res.render('register')
 }
 
-function register(req, res) {
-    const { fname, lname, email, student_id } = req.body;
+async function register(req, res) {
+    const { prefix, fname, lname, nickname, years, student_id, email, password, confirm_password } = req.body;
     try {
+      const hash_password = await bcrypt.hash(password, 12)
       connection.query(
-        "INSERT INTO user(fname, lname, email, student_id) VALUE(?,?,?,?)",
-        [fname, lname, email, student_id],
+        "INSERT INTO users(prefix_name, fname, lname, nickname, years, student_id, email, password) VALUE(?,?,?,?,?,?,?,?)",
+        [prefix, fname, lname, nickname, years, student_id, email, hash_password],
         (err, result, fields) => {
           if (err) {
             console.log("insert error");
             console.log(err);
             return res.status(400).send();
           }
-          return res
-            .status(201)
-            .json({ message: "New user created successfully" });
+          return res.redirect("/signin")        
         }
       );
     } catch (error) {
       console.log(error);
-      return res.status(500).send();
+      return res.redirect("/register_page")
     }
   }
 module.exports = { home, signInPage, registerPage, register }

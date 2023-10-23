@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.tailwindcss.com/2.2.15/tailwind.min.css" rel="stylesheet">
 </head>
+
 <body class="min-h-screen bg-black">
     <!-- <h1>Sign-in</h1>
     <div class="container m-10">
@@ -46,21 +48,28 @@
             </div>
         </form>
     </div> -->
-    <div class="flex h-screen justify-center items-center flex-col">
-        <div class="text-white text-5xl font-bold font-['KMITLGO']  mt-[-100px] flex items-center">
-            <span class="mr-2">SIGN IN</span>
-            <img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" alt="SVG Sign in" class="w-10 h-10" />
+    <form action="/auth" method="POST">
+        <div class="flex h-screen justify-center items-center flex-col">
+            <div class="text-white text-5xl font-bold font-['KMITLGO']  mt-[-100px] flex items-center">
+                <span class="mr-2">SIGN IN</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" alt="SVG Sign in"
+                    class="w-10 h-10" />
+            </div>
+            <div class="text-white text-lg ml-[-320px] mt-10 mb-2">Student ID :</div>
+            <input type="text" name="student_id" class="rounded-2xl h-[60px] text-black w-[425px] p-2"
+                placeholder="  Enter your Student ID" />
+            <div class="text-white text-lg ml-[-320px] mt-6 mb-2">Password :</div>
+            <input type="text" name="years" class="rounded-2xl h-[60px] text-black w-[425px] p-2"
+                placeholder="  Enter your Password" />
+            <a href="#">
+                <button
+                    class="w-[120px] h-[39px] px-4 py-2.5 bg-amber-200 from-orange-600 to-yellow-400 rounded-full justify-center items-center gap-2 inline-flex ml-[300px] mt-[20px]">
+                    <div class="text-black text-xl font-normal font-['KMITLGO']">SIGN-IN</div>
+                </button>
         </div>
-        <div class="text-white text-lg ml-[-320px] mt-10 mb-2">Student ID :</div>
-        <input type="text" class="rounded-2xl h-[60px] text-black w-[425px] p-2" placeholder="  Enter your Student ID" />
-        <div class="text-white text-lg ml-[-320px] mt-6 mb-2">Password :</div>
-        <input type="text" class="rounded-2xl h-[60px] text-black w-[425px] p-2" placeholder="  Enter your Password" />
-        <a href="#">
-            <button class="w-[120px] h-[39px] px-4 py-2.5 bg-amber-200 from-orange-600 to-yellow-400 rounded-full justify-center items-center gap-2 inline-flex ml-[300px] mt-[20px]">
-                <div class="text-black text-xl font-normal font-['KMITLGO']">SIGN-IN</div>
-            </button>
-    </div>
+    </form>
     <div class="absolute top-[625px] left-0 right-0 h-[20px] bg-[#DD501C]"></div>
     <div class="absolute bottom-0 w-full h-[70px] bg-[#DD501C]"></div>
 </body>
+
 </html>

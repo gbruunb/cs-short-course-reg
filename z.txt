@@ -1,12 +1,87 @@
-<tbody>
-                <% var count = 1 %>
-                <% for (const course of courses) { %>
-              <tr>
-                <td class="border border-slate-700 ..."><%= count %></td>
-                <td class="border border-slate-700 ..."><%= course.course_name %></td>
-                <td class="border border-slate-700 ..."><%= course.name %></td>
-                <td class="border border-slate-700 ..."><%= course.description %></td>
-              </tr>
-              <% count++ %>
-              <% } %>
-            </tbody>
+const express = require("express");
+const router = express.Router();
+const app = require("../app");
+const { connection } = require("../controllers/DBConnection");
+
+
+
+const MainController = require("../controllers/MainController");
+const LecturerController = require("../controllers/LecturerController");
+const StudentController = require("../controllers/StudentController");
+
+router.get("/", MainController.home);
+router.get("/signin", MainController.signInPage);
+router.get("/register_page", MainController.registerPage);
+
+router.get("/create-course-form", LecturerController.createCourseForm);
+router.get("/course-list", StudentController.showCourseList);
+router.get("/open-course", StudentController.openCourse);
+router.get("/edit-course/:id", LecturerController.editCourseForm);
+
+// router.post("/register", MainController.register);
+
+router.post("/add-course", LecturerController.addCourse);
+router.post("/update-course/:id", LecturerController.editCourse);
+router.get("/delete-course/:id", LecturerController.deleteCourse);
+
+
+
+const bcrypt = require("bcrypt");
+const { body, validationResult, Result } = require("express-validator");
+
+const ifNotLoggedIn = (req, res, next) => {
+  if (!req.session.isLoggedIn) {
+    return res.render("signin");
+  }
+  next();
+}
+
+const ifLoggedIn = (req, res, next) => {
+    if (req.session.isLoggedIn) {
+      return res.render("course-list");
+    }
+    next();
+  }
+
+router.get('/test', ifNotLoggedIn, (req, res, next) => {
+    connection.execute("SELECT name FROM users WHERE id = ?", [req.session.userID])
+    .then(([rows]) => {
+        res.render('course-list',{
+            name: rows[0].name
+        })
+    })
+})
+
+router.post("/register", ifLoggedIn, [
+    body('email','Invalid').isEmail().custom((value) => {
+        return connection.execute('SELECT email FROM users WHERE email = ?',[value])
+        .then(([rows]) => {
+            if (rows.length > 0) {
+                return Promise.reject('This email already in use');
+            }
+            return true;
+        })
+    }),
+
+    body('student_id','Student ID is empty').trim().not().isEmpty(),
+    body('password','Password must be of minimum length 6 char').trim().isLength({min: 6}),
+],
+    (req, res, next) => {
+        const validation_result = validationResult(req);
+        const { student_id, prefix, fname, lname, nickname, years, email, password } = req.body;
+
+        if(validation_result.isEmpty()) {
+            bcrypt.hash(password, 12).then((hass_pass) => {
+                connection.execute("INSERT INTO users (student_id, prefix_name, fname, lname, nickname, years, email, password) VALUE (?, ?, ?, ?, ?, ?, ?, ?)",[student_id, prefix, fname, lname, nickname, years, email, hass_pass])
+                .then(result => {
+                    res.send(`account create success`)
+                }).catch(err => {
+                    if (err) throw err;
+                })
+            }).catch(err => {
+                if (err) throw err;
+            })
+        } 
+    });
+
+module.exports = router;
