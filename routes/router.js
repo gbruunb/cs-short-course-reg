@@ -1,6 +1,17 @@
 const express = require('express')
 const router = express.Router()
 
+const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
+const { body, validationResult } = require('express-validator')
+
+// app.use(cookieSession({
+//     name: 'seesion',
+//     key: ['key1','key2'],
+//     maxAge: 3600 * 1000 //1hr
+// }))
+
+
 const MainController = require('../controllers/MainController')
 const LecturerController = require('../controllers/LecturerController')
 const StudentController = require('../controllers/StudentController')
