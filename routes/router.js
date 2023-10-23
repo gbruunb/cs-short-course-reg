@@ -16,6 +16,7 @@ router.get("/open-course", StudentController.openCourse);
 router.get("/edit-course/:id", LecturerController.editCourseForm);
 
 router.post("/register", MainController.register);
+router.post("/auth", MainController.auth);
 
 router.post("/add-course", LecturerController.addCourse);
 router.post("/update-course/:id", LecturerController.editCourse);
