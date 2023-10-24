@@ -14,11 +14,12 @@ router.post("/edit-course/:id", LecturerController.editCourseForm);
 
 router.get("/verify-id/:id", LecturerController.verifyID);
 
-
 router.post("/add-course", LecturerController.addCourse);
 router.post("/update-course/:id", LecturerController.editCourse);
 router.get("/delete-course/:id", LecturerController.deleteCourse);
 
+router.get("/reg/:course_id", StudentController.regCourseForm);
+router.post("/reg-course/:id", StudentController.regCourse);
 
 
 
