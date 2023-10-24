@@ -21,6 +21,4 @@ router.get("/delete-course/:id", LecturerController.deleteCourse);
 
 
 
-
-
 module.exports = router;
