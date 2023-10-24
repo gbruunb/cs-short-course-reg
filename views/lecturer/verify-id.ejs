@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Verify id</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.tailwindcss.com/2.2.15/tailwind.min.css" rel="stylesheet">
+
 </head>
-<body>
-    กรอกรหัสสำหรับคอร์ส
+<body class="bg-black">
+    <%- include('../navbar')%>
+    <div class="flex h-screen items-center flex-col">
+    <div class= "text-white text-5xl pt-72 font-bold font-KMITLGO">ENTER COURSE CODE</div>
+    <div class="absolute top-1/2 rounded-full text-3xl bg-[#EE7832] text-white p-6">
     <form action="/edit-course/<%= course_id %>" method="post">
-        <input type="text" name="secret_key">
-        <button type="submit">ตรวจสอบ</button>
+        <input class="text-black"type="text" name="secret_key">
+        <button class="font-bold font-KMITLGO"type="submit">SUBMIT</button>
 
     </form>
+</div>
+</div>
 </body>
 </html>

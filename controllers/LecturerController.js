@@ -21,7 +21,7 @@ function addCourse(req, res) {
     contact,
     content,
   } = req.body;
-  const secret_key = "testtest";
+  const secret_key = "asniansdoinaoisuciedinsicsidncjsinxcjnoi";
   try {
     connection.query(
       "INSERT INTO course(lec_name, lec_nickname, role, date, time, course_name, des, device, tool, more, contact, content, secret_key) VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?)",

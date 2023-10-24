@@ -21,7 +21,9 @@ router.get("/delete-course/:id", LecturerController.deleteCourse);
 router.get("/reg/:course_id", StudentController.regCourseForm);
 router.post("/reg-course/:id", StudentController.regCourse);
 
-
+router.get("/about",(req,res) => {
+    res.render('about')
+})
 
 
 module.exports = router;
