@@ -61,7 +61,7 @@ function regCourse (req, res) {
                 console.log(err);
                 return res.status(400).send
             }
-            res.redirect('/all-course')
+            res.render('success',{message:"ลงทะเบียนเรียนเรียบร้อย!"})
         })
     } catch (error) {
         console.log(error);
