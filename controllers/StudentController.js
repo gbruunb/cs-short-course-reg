@@ -1,13 +1,19 @@
 const { connection } = require("./DBConnection");
 
-function showCourseList(req,res) {
+async function showCourseList(req,res) {
+    const api_key = '1c5166e56d04c863694b6e0930ea6e40'
+    const city = "Bangkok"
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${api_key}`
+    const response = await fetch(url);
+    const weatherData = await response.json();
+
     try {
         connection.query("SELECT * FROM course", (err, result, fields) => {
             if(err){
                 console.log(err);
                 return res.status(400).send
             }
-            res.render('student/course-list', { courses: result })
+            res.render('student/course-list', { courses: result, weatherData: weatherData })
         })
     } catch (error) {
         console.log(error);

@@ -1,6 +1,5 @@
 const { connection } = require("./DBConnection");
 var randomStr = require("randomstring");
-var nodemailer = require("nodemailer");
 
 function createCourseForm(req, res) {
   res.render("lecturer/create-course");
@@ -20,11 +19,12 @@ function addCourse(req, res) {
     more,
     contact,
     content,
+    picture
   } = req.body;
   const secret_key = randomStr.generate(30);
   try {
     connection.query(
-      "INSERT INTO course(lec_name, lec_nickname, role, date, time, course_name, des, device, tool, more, contact, content, secret_key) VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO course(lec_name, lec_nickname, role, date, time, course_name, des, device, tool, more, contact, content, secret_key, picture) VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         lec_name,
         lec_nickname,
@@ -39,6 +39,7 @@ function addCourse(req, res) {
         contact,
         content,
         secret_key,
+        picture
       ],
       (err, result, fields) => {
         if (err) {
@@ -98,11 +99,12 @@ function editCourse(req, res) {
     more,
     contact,
     content,
+    picture
   } = req.body;
   const id = req.params.id
   try {
     connection.query(
-      "UPDATE course SET lec_name = ?, lec_nickname = ?, role = ?, date = ?, time = ?, course_name = ?, des = ?, device = ?, tool = ?, more = ?, contact = ?, content = ? WHERE id = ?",
+      "UPDATE course SET lec_name = ?, lec_nickname = ?, role = ?, date = ?, time = ?, course_name = ?, des = ?, device = ?, tool = ?, more = ?, contact = ?, content = ?, picture = ? WHERE id = ?",
       [
         lec_name,
         lec_nickname,
@@ -116,6 +118,7 @@ function editCourse(req, res) {
         more,
         contact,
         content,
+        picture,
         id,
       ],
       (err, result, fields) => {
@@ -144,9 +147,7 @@ function deleteCourse(req, res) {
           console.log("insert error");
           return res.status(400).send();
         }
-        return res
-          .status(201)
-          .json({ message: "New user created successfully" });
+        return res.render('success',{message:"ลบคอร์สเรียบร้อย!"})
       }
     );
   } catch (error) {
