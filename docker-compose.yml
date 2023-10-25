@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  mysql:
+    build: ./models
+    image: short_course_db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  cs-short-course-reg:
+    build: ./
+    image: cs-short-course-reg
+    depends_on:
+      - mysql
+    ports:
+      - "8080:3000"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
